@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block body %}
+    <style>
+        .searchbar{
+            margin: 10px;
+
+        }
+    </style>
+
+    <div class="row searchbar">
+
+{#        <script type="text/javascript">#}
+{#            $(document).ready(function(){#}
+{##}
+{#                $(".tagselect").select2({#}
+{#                    ajax: {#}
+{#                        url: "https://api.github.com/search/repositories",#}
+{#                        dataType: 'json',#}
+{#                        delay: 250,#}
+{#                        data: function (params) {#}
+{#                            return {#}
+{#                                q: params.term, // search term#}
+{#                                page: params.page#}
+{#                            };#}
+{#                        },#}
+{#                        processResults: function (data, params) {#}
+{#                            // parse the results into the format expected by Select2#}
+{#                            // since we are using custom formatting functions we do not need to#}
+{#                            // alter the remote JSON data, except to indicate that infinite#}
+{#                            // scrolling can be used#}
+{#                            params.page = params.page || 1;#}
+{##}
+{#                            return {#}
+{#                                results: data.items,#}
+{#                                pagination: {#}
+{#                                    more: (params.page * 30) < data.total_count#}
+{#                                }#}
+{#                            };#}
+{#                        },#}
+{#                        cache: true#}
+{#                    },#}
+                    {#                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work#}
+{#                    minimumInputLength: 1,#}
+                    {#                templateResult: formatRepo, // omitted for brevity, see the source of this page#}
+                    {#                templateSelection: formatRepoSelection // omitted for brevity, see the source of this page#}
+{#                });#}
+{##}
+{##}
+{#            });#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#        </script>#}
+        <div class="tag" style="width: 60%;">
+            <label for="id_tagselect" style="width: 100%;">
+                Select tags:
+                <br>
+                <select class="tagselect js-states form-control" id="id_tagselect" multiple="multiple">
+                    {% for tag in tags %}
+                        <option value={{ tag.name }}>{{ tag.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+
+        <div class="category" style="width: 60%;">
+            <label for="id_categoryselect" style="width: 100%;">
+                Select categories:
+                <br>
+                <select class="tagselect js-states form-control" id="id_categoryselect" multiple="multiple">
+                    {% for category in categories %}
+                        <option value={{ category.name }}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <a href="#" class="btn btn-default" style="float: right;"><span class="glyphicon glyphicon-search"></span>Search</a>
+        </div>
+
+
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-3" style="border: solid black 1px;">
+            <p style="display: block; text-align: center;">
+                Most Viewd
+            </p>
+            <hr>
+            {% include 'news-selected.html'%}
+        </div>
+
+        <div class="col-md-6">
+            {% include 'news-full.html'%}
+        </div>
+
+        <div class="col-md-3" style="border: solid black 1px;">
+            <p style="display: block; text-align: center;">
+                Most Liked
+            </p>
+            <hr>
+            {% include 'news-selected.html'%}
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

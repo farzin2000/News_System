@@ -14,9 +14,20 @@ Including another URLconf
     2. Import the include() function: from django.conf.urls import url, include
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+from News_System import settings
+from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
+from authsystem.views import index_page
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', index_page),
+    url(r'^auth/', include('authsystem.urls')),
+    url(r'^news/', include('news.urls')),
+
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

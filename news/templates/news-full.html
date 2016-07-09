@@ -1,0 +1,74 @@
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block body %}#}
+    <style>
+        .not-active {
+            background: darkgray;
+            pointer-events: none;
+            cursor: default;
+        }
+    </style>
+    <div class="news-full" style="border: solid black 1px; padding-top: 5px; border-radius: 10px; margin-bottom: 10px;">
+        <div class="base" style="margin: 10px;">
+            {#        <div class="author">#}
+            <p style="font-size: 40px; text-align: center; display: block;">{{ news.title }}</p>
+            <hr>
+            <img src="" style="width: 90%; height: 400px; display: block; margin: auto;">
+
+
+            <hr>
+            <div class="content">
+                {{ news.content }}
+            </div>
+            <hr>
+            <div class="stat">
+                <a href="#" class="btn btn-default not-active" ><span class="glyphicon glyphicon-thumbs-up" style="margin-right: 4px;"></span>Like</a>
+                <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" style="margin-right: 4px;"></span>Dislike</a>
+                <a href="#" class="btn btn-default" style=" float: right;"><span class="glyphicon glyphicon-picture"></span>Album gallery</a>
+                <a href="#" id="comment-toggle" class="btn btn-default" style=" float: right;"><span class="glyphicon glyphicon-comment" style="margin-right: 4px;"></span>Comments</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="comments" style="border-radius: 0px; border: solid black 1px; margin-bottom: 50px;">
+
+        {% for comment in news.comments %}
+
+            <div class="comment" style="margin: 10px;">
+                <div class="author">
+                    <img src="#" style="max-width: 30px; max-height: 30px;">
+                    {{ comment.username }}
+                    <p style="float: right; color: lightgray;">{{ comment.date }}</p>
+                </div>
+                <div class="content">
+                    {{ comment.comment }}
+                </div>
+            </div>
+            <hr>
+
+
+        {% endfor %}
+
+
+
+        <p style="margin: 10px;">
+            Enter your comment bellow:
+        </p>
+        <form class="form-group" style="margin: 5px;" action="/content/add" method="POST">
+            <input type="text" class="form-control" name="content" style="display: inline-block; width: 93%;">
+            <input type="hidden" class="form-control" name="group" value={{ selected_group.groupId.id }}>
+            <button class="btn btn-primary" style="float: right;">Send</button>
+        </form>
+
+    </div>
+    <script>
+        $( "#comment-toggle" ).click(function() {
+            $( ".comments" ).toggle();
+        });
+    </script>
+{##}
+{#{% endblock %}#}
+
+
+

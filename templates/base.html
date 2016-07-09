@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Newsify</title>
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    {#    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.css" />#}
+    {#    <script src="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>#}
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+
+</head>
+<body>
+<div class="navbar navbar-default">
+    <div class="navbar-header" style="float: right;">
+
+        {% if user.is_authenticated %}
+            <a class="navbar-brand" href="/management/{{ user.id }}">Managment</a>
+        {% endif %}
+        <a class="navbar-brand" href="#">Newsify</a>
+    </div>
+
+    <div class="navbar-header" style="float: left;">
+
+        {% if user.is_authenticated %}
+            <a class="navbar-brand" href="/auth/logout">Logout ({{ user }})</a>
+        {% endif %}
+    </div>
+
+
+</div>
+<div class="container">
+    {% block body %}
+
+    {% endblock %}
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.tagselect').select2();
+    });
+</script>
+</body>
+</html>

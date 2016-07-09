@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <style>
+        .intro {
+            width: 400px;
+            direction: ltr;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .intro p {
+            margin: auto auto;
+        }
+
+        .login-signup {
+            position: relative;
+            width: 400px;
+            height: 100px;
+            margin: 50px auto;
+
+        }
+    </style>
+
+    <div class="intro">
+        <p>
+            Newsify system helps you gather all news across the world wide web in one click!!!
+        </p>
+    </div>
+
+    <div class="login-signup row">
+        <a href="/auth/signup" class="btn btn-primary">Signup</a>
+        <a href="/auth/login" class="btn btn-primary" style="float: right;">Login</a>
+    </div>
+{% endblock %}

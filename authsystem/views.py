@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, render_to_response
 from django.views.generic.edit import CreateView
 from authsystem.models import User
-from content.models import UserGroupAssignment
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User as AuthUser
 from django.views.decorators.csrf import csrf_exempt
@@ -13,7 +12,7 @@ def index_page(request):
     output = {
         'user':request.user
     }
-    return render_to_response('main.html', output)
+    return render_to_response('index.html', output)
 
 
 
@@ -34,7 +33,7 @@ class MyUserCreate(CreateView):
 
     model = User
     fields = ['gender', 'avatar']
-    success_url = "/main"
+    success_url = "/"
 
     def form_valid(self, form):
         user = form.save(commit=False)
@@ -62,7 +61,7 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect("/main")
+                return redirect("/")
             else:
                 return render(request, 'user_not_active.html')
 
